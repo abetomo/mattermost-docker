@@ -1,11 +1,10 @@
-FROM postgres:10-alpine
+FROM postgres:13.2-alpine
 
 ENV DEFAULT_TIMEZONE UTC
 # Mandatory nowdays with PG 10
 ENV WAL_LEVEL logical
 
 # Install some packages to use WAL
-RUN echo "azure<5.0.0" > pip-constraints.txt
 RUN apk add --no-cache \
       build-base \
       curl \
@@ -13,11 +12,11 @@ RUN apk add --no-cache \
       libffi-dev \
       linux-headers \
       python3-dev \
-      py3-pip \
+      py-pip \
       py-cryptography \
       pv \
     && pip install --upgrade pip \
-    && pip --no-cache-dir install -c pip-constraints.txt 'wal-e<1.0.0' envdir \
+    && pip --no-cache-dir install wal-e \
     && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
 # Add wale script
