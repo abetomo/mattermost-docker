@@ -27,7 +27,7 @@ services:
         - edition=team
         - PUID=1000
         - PGID=1000
-        - MM_VERSION=5.38.2
+        - MM_VERSION=5.39.0
     restart: unless-stopped
     ports:
       - "80:80"
